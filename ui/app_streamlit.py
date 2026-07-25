@@ -54,20 +54,28 @@ try:
     NEWS_API_KEY = st.secrets["NEWS_API_KEY"]
     SERP_API_KEY = st.secrets["SERPAPI_API_KEY"]
     groq_api_key = st.secrets["GROQ_API_KEY"]
-    print("✅ Using Streamlit secrets for API keys")
+    st.success("Using Streamlit secrets for API keys")
 except:
     # Fallback to .env for local development
     load_dotenv()
     NEWS_API_KEY = os.getenv("NEWS_API_KEY")
     SERP_API_KEY = os.getenv("SERPAPI_API_KEY")
     groq_api_key = os.getenv("GROQ_API_KEY")
-    print("✅ Using .env file for API keys (local development)")
+    st.success("Using .env file for API keys (local development)")
 
-# Initialize LLM with Groq
-llm = ChatGroq(
-    api_key=groq_api_key,
-    model="mixtral-8x7b-32768"
-)
+# Initialize LLM with Groq only when an API key is available
+if groq_api_key:
+    try:
+        llm = ChatGroq(
+            api_key=groq_api_key,
+            model="llama-3.3-70b-versatile"
+        )
+    except Exception as exc:
+        llm = None
+        st.warning(f"Groq is unavailable: {exc}")
+else:
+    llm = None
+    st.warning("Groq API key not configured. AI chat features will be unavailable until a key is provided.")
 
 if 'users' not in st.session_state:
     st.session_state.users = {
@@ -128,8 +136,11 @@ def get_top_news():
 if "memory" not in st.session_state:
     st.session_state.memory = ConversationBufferMemory(return_messages=True)
 
-# Use the already initialized llm from above
-conversation = ConversationChain(llm=llm, memory=st.session_state.memory, verbose=False)
+# Use the already initialized llm from above when available
+if llm is not None:
+    conversation = ConversationChain(llm=llm, memory=st.session_state.memory, verbose=False)
+else:
+    conversation = None
 import streamlit as st
 
 # Initialize session state variables
@@ -150,11 +161,14 @@ import streamlit as st
 def login_page():
     st.set_page_config(page_title="Login | SmartLife", layout="wide")
 
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    login_image = os.path.join(project_root, "assets", "login_logo.jpeg")
+
     # Two-column layout: left for image, right for login
     left_col, right_col = st.columns([0.5, 0.6])
 
     with left_col:
-        st.image("assets/login_logo.jpeg", use_container_width=True)
+        st.image(login_image, use_container_width=True)
 
 
     with right_col:
@@ -191,12 +205,15 @@ def login_page():
 def signup_page():
     st.set_page_config(page_title="Sign Up | SmartLife", layout="wide")
 
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    signup_image = os.path.join(project_root, "assets", "signup.png")
+
     # Two-column layout: left for image, right for signup form
     left_col, right_col = st.columns([0.6, 1])  # 0.5 width each
 
     with left_col:
         # Make image fill container
-        st.image("assets/signup.png", use_container_width=True)
+        st.image(signup_image, use_container_width=True)
 
     with right_col:
         st.markdown("<h1 style='text-align: center;'>📝 Sign Up</h1>", unsafe_allow_html=True)

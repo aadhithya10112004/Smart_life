@@ -73,7 +73,7 @@ def create_voice_recorder():
                 # Save audio
                 audio_file = collector.save_audio()
                 st.session_state.recorded_audio_file = audio_file
-                st.success("✅ Recording complete! Your voice has been captured.")
+                st.success("Recording complete! Your voice has been captured.")
                 st.experimental_rerun()
     with col2:
         if st.session_state.recorded_audio_file:
