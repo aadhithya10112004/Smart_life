@@ -114,27 +114,34 @@ http://localhost:8501
 
 ### Login Page
 
-Add screenshot here.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8ff60bcd-c89c-4f16-a3ca-1d67ba62aca7" />
+
 
 ### Dashboard
 
-Add screenshot here.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d30264a2-9f96-47ff-adbc-e207563c397f" />
 
-### AI Assistant
 
-Add screenshot here.
+### Task Manger
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3b0af173-45e0-4b2b-927a-fac6fc941602" />
+
 
 ### News Summarizer
 
-Add screenshot here.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f8175ffd-964e-4507-87ed-1a8c139f32b5" />
+
 
 ### PDF Summarizer
 
-Add screenshot here.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/da8728f2-ef92-4ed5-8627-545674dfa30a" />
+
 
 ### Mood Tracker
 
-Add screenshot here.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5c8a173b-2883-4e7e-859d-7696bd44863e" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f25ec531-8b57-4ffb-b79d-857940a58784" />
+
 
 ---
 
@@ -154,7 +161,6 @@ Add screenshot here.
 
 **Aadhithya S**
 
-Computer Science Engineering Student
 
 GitHub: https://github.com/aadhithya10112004
 
